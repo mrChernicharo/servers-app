@@ -11,7 +11,8 @@ import {
   OnDestroy,
   SimpleChanges,
   ViewChild,
-  ElementRef
+  ElementRef,
+  ContentChild
 } from '@angular/core';
 
 @Component({
@@ -34,9 +35,14 @@ AfterViewChecked {
     name: string,
     content: string
   }
+
   @Input() name: string;
+
   @ViewChild('heading', { static: true })
   header: ElementRef;
+
+  @ContentChild('contentParagraph', { static: true })
+  paragraph: ElementRef;
 
   constructor() {
     console.log('constructor was called')
@@ -49,29 +55,26 @@ AfterViewChecked {
 
   ngOnInit(): void {
     console.log('ngOnInit was called')
-    console.log('-> textContext: ' + this.header.nativeElement.textContent)
+    console.log('-> textContent: ' + this.header.nativeElement.textContent)
+    console.log('-> ParagraphContent: ' + this.paragraph.nativeElement.textContent)
   }
 
   ngDoCheck () {
     console.log('ngDoCheck was called')
-
   }
   ngAfterContentInit () {
     console.log('ngAfterContentInit was called')
-
+    console.log('-> ParagraphContent: ' + this.paragraph.nativeElement.textContent)
   }
   ngAfterContentChecked() {
     console.log('ngAfterContentChecked was called')
-
   }
   ngAfterViewInit() {
     console.log('ngAfterViewInit was called')
-    console.log('-> textContext: ' + this.header.nativeElement.textContent)
-
+    console.log('-> textContent: ' + this.header.nativeElement.textContent)
   }
   ngAfterViewChecked () {
     console.log('ngAfterViewChecked was called')
-
   }
   ngOnDestroy() {
     console.log('ngOnDestroy was called')
